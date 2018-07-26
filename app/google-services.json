@@ -1,0 +1,95 @@
+{
+  "project_info": {
+    "project_number": "648112295961",
+    "firebase_url": "https://ccsfirebaseproject.firebaseio.com",
+    "project_id": "ccsfirebaseproject",
+    "storage_bucket": "ccsfirebaseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648112295961:android:a125e8adb9e114fd",
+        "android_client_info": {
+          "package_name": "com.example.songhyeonseok.ccs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648112295961-rmingqaoccnerhckcoa35skd0hk52o2k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.songhyeonseok.ccs",
+            "certificate_hash": "4bd7c71e59b52815f18a0b5456ead4e818689109"
+          }
+        },
+        {
+          "client_id": "648112295961-t7t3o1l0317ufrjr0pjkrl3mdfpujmki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.songhyeonseok.ccs",
+            "certificate_hash": "387013765d366164c807c59ca5baac88696f2d9d"
+          }
+        },
+        {
+          "client_id": "648112295961-ae34s4l644kt3apkoh93t46noavqd17p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.songhyeonseok.ccs",
+            "certificate_hash": "48eccc3470ddb6a6959e3bdf66029cf26a6c8738"
+          }
+        },
+        {
+          "client_id": "648112295961-tapv5oj5jhsl9irhi5j0eggkirc6bor6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.songhyeonseok.ccs",
+            "certificate_hash": "ee9d1bf91c918f49d09f9c53d6c9c43c93ceba84"
+          }
+        },
+        {
+          "client_id": "648112295961-app9jckgnksrlvn4sektgpmpcpr7kh5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.songhyeonseok.ccs",
+            "certificate_hash": "7a2190c070c3e67f29b94bccd99a7bbf4e87dffc"
+          }
+        },
+        {
+          "client_id": "648112295961-ptf99ufci8lhcvvlegii6g2o9ricagev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.songhyeonseok.ccs",
+            "certificate_hash": "126dbd48e4eae5da7423db4b99077a820767b476"
+          }
+        },
+        {
+          "client_id": "648112295961-v9pqfk5p0fpth4mj7q0v62pnqicgjlmr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXCukpWGia0wEfnRjap4M9hXEp9bG7hHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648112295961-v9pqfk5p0fpth4mj7q0v62pnqicgjlmr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
