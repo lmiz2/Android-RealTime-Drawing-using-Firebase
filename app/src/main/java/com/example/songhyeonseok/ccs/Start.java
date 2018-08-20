@@ -202,7 +202,7 @@ public class Start extends BaseActivity implements TabFragment1.tab1Listener,Tab
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //FirebaseDatabase.getInstance().goOffline();
+//        FirebaseDatabase.getInstance().goOffline();
         refDB.setValue(false);
     }
 

@@ -48,13 +48,13 @@ public class GONG extends BaseActivity
         implements GoogleApiClient.OnConnectionFailedListener{
 
     private SignInButton mSigninBtn;
-    private GoogleApiClient mgoogleApiClient;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser firebaseUser;
-    private DatabaseReference ref;
+//    private GoogleApiClient mgoogleApiClient;
+//    private FirebaseAuth mFirebaseAuth;
+//    private FirebaseUser firebaseUser;
+//    private DatabaseReference ref;
+//    private FirebaseDatabase mFirebaseDatabase;
     private User login_user;
     private TextView icon;
-    private FirebaseDatabase mFirebaseDatabase;
     LinearLayout loading_cover;
     ConstraintLayout cover;
 
@@ -69,9 +69,9 @@ public class GONG extends BaseActivity
         loading_cover = (LinearLayout)findViewById(R.id.loading_cover);
         mSigninBtn = (SignInButton)findViewById(R.id.sign_in_btn);
         icon = (TextView) findViewById(R.id.appicon);
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        ref = mFirebaseDatabase.getReference().child("Members");
+        setGlobalDB(FirebaseDatabase.getInstance());
+        setGlobalAuth(FirebaseAuth.getInstance());
+        setGlobalRef(getGlobalDB().getReference().child("Members"));
 
         icon.setTypeface(Typeface.createFromAsset(getAssets(),"Dosis-ExtraLight.ttf"));
 
@@ -113,10 +113,10 @@ public class GONG extends BaseActivity
                 .requestEmail()
                 .build();
 
-        mgoogleApiClient = new GoogleApiClient.Builder(this)
+        setGlobalGApi(new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions)
-                .build();
+                .build());
 
 
 
@@ -128,9 +128,9 @@ public class GONG extends BaseActivity
         //        startActivity(intent);
                 if(getIntent().getBooleanExtra("logout",false)){
                     Log.d("LOGOUT","true");
-                    mgoogleApiClient.clearDefaultAccountAndReconnect();
+                    getGlobalGApi().clearDefaultAccountAndReconnect();
                 }
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(mgoogleApiClient);
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(getGlobalGApi());
                 startActivityForResult(intent, 100);
             }
         });
@@ -171,25 +171,25 @@ public class GONG extends BaseActivity
                 = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
         Task<AuthResult> authResultTask
-                = mFirebaseAuth.signInWithCredential(credential);
+                = getGlobalAuth().signInWithCredential(credential);
 
         authResultTask.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                firebaseUser = authResult.getUser();
-                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                setGlobalUser(authResult.getUser());
+                getGlobalRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         login_user = new User();
-                        login_user.setUser_id(firebaseUser.getUid());
-                        login_user.setUser_name(firebaseUser.getDisplayName());
-                        login_user.setUser_email(firebaseUser.getEmail());
+                        login_user.setUser_id(getGlobalUser().getUid());
+                        login_user.setUser_name(getGlobalUser().getDisplayName());
+                        login_user.setUser_email(getGlobalUser().getEmail());
                         login_user.setConnecting(true);
                         for(DataSnapshot snapshot: dataSnapshot.getChildren()){
 
                             if(snapshot == null){
-                                ref.removeValue();
-                                ref.child(firebaseUser.getUid()).setValue(login_user);
+                                getGlobalRef().removeValue();
+                                getGlobalRef().child(getGlobalUser().getUid()).setValue(login_user);
                                 Intent intent = new Intent(GONG.this,Start.class);
                                 startActivity(intent);
                                 finish();
@@ -197,7 +197,7 @@ public class GONG extends BaseActivity
                             }
 
                             if(login_user.getUser_id().equals(snapshot.getKey())){
-                                ref.child(firebaseUser.getUid()).child("connecting").addListenerForSingleValueEvent(new ValueEventListener() {
+                                getGlobalRef().child(getGlobalUser().getUid()).child("connecting").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         try {
@@ -218,7 +218,7 @@ public class GONG extends BaseActivity
                                 return;
                             }
                         }
-                        ref.child(firebaseUser.getUid()).setValue(login_user);
+                        getGlobalRef().child(getGlobalUser().getUid()).setValue(login_user);
                         Intent intent = new Intent(GONG.this,Start.class);
                         startActivity(intent);
                         finish();
@@ -242,10 +242,10 @@ public class GONG extends BaseActivity
             loading_cover.setVisibility(View.GONE);
             //cover.setVisibility(View.VISIBLE);
             cover.setClickable(true);
-            mgoogleApiClient.clearDefaultAccountAndReconnect();
+            getGlobalGApi().clearDefaultAccountAndReconnect();
         }else{
             Log.d("회원 존재", "PASS");
-            ref.child(firebaseUser.getUid()).child("connecting").setValue(true);
+            getGlobalRef().child(getGlobalUser().getUid()).child("connecting").setValue(true);
             Intent intent = new Intent(GONG.this, Start.class);
             startActivity(intent);
             finish();

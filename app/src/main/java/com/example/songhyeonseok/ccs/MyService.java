@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.songhyeonseok.ccs.R;
@@ -28,6 +29,7 @@ public class MyService extends Service {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference ref;
     String myUID;
+    int showCnt = 0;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -44,12 +46,14 @@ public class MyService extends Service {
         db = FirebaseDatabase.getInstance();
         myUID = mFirebaseUser.getUid();
         ref = db.getReference().child("Members").child(myUID).child("RoomList");
-
+//    ref.onDisconnect().
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ListItemRoom tmp_item = dataSnapshot.getValue(ListItemRoom.class);
-                showNotifi(tmp_item.getNames(),tmp_item.getRoomID());
+                showNotifi(tmp_item.getNames(), tmp_item.getRoomID());
+                Log.d("알림 로그", "onChildAdded: "+s+" "+
+                        dataSnapshot.exists());
             }
 
             @Override
