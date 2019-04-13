@@ -346,10 +346,8 @@ public class ChattRoom extends BaseActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String tmp = dataSnapshot.getValue().toString();
-                Log.d("@@@@@@@@@@@@@@@@@@22",tmp);
                 if(!tmp.equals(MyUID)) {
                     mv.setScreenClear();
-                    Log.d("@@@@@@@@@@@@@@@@@@12",MyUID);
                 }
             }
 

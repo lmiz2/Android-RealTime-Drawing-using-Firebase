@@ -2,7 +2,11 @@ package com.example.songhyeonseok.ccs;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,20 +56,64 @@ public class BaseActivity extends AppCompatActivity {//모든 액티비티의 �
     }
 
     @Override
-    public void onResume() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("LifeCycle","onCreate");
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("LifeCycle","onStart");
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
+        Log.d("LifeCycle","onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.d("LifeCycle","onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("LifeCycle","onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("LifeCycle","onDestroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("LifeCycle","onRestart");
     }
 
     @Override
     public void onLowMemory() {
         logoutUser();
         super.onLowMemory();
+        Log.d("LifeCycle","onLowMemory");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        Log.d("LifeCycle","onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d("LifeCycle","onRestoreInstanceState");
     }
 
     @Override
